@@ -1,6 +1,24 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
 import HelloWorld from "@/components/HelloWorld.vue";
+import Login from '@/components/Login/Login.vue';
+import { useAppStore } from '@/stores/app';
+
+</script>
+<script>
+export default {
+  // Properties returned from data() become reactive state
+  // and will be exposed on `this`.
+  data() {
+    return {
+      AccessToken: useAppStore()
+    }
+  },
+  mounted(){
+    //const store = useAppStore();
+    //this.$store.AccessToken = store;
+  }
+}
 </script>
 
 <template>
@@ -14,6 +32,9 @@ import HelloWorld from "@/components/HelloWorld.vue";
     />
 
     <div class="wrapper">
+      <div>{{ AccessToken }}}</div>
+      <Login :AccessToken="AccessToken"></Login>
+      
       <HelloWorld msg="You did it!" />
 
       <nav>

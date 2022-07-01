@@ -4,9 +4,11 @@ import { createPinia } from "pinia";
 import App from "./App.vue";
 import router from "./router";
 
-const app = createApp(App);
+window.APP = createApp(App);
 
-app.use(createPinia());
-app.use(router);
+window.APP.use(createPinia());
+window.APP.use(router);
 
-app.mount("#app");
+window.APP.mount("#app");
+
+//window.APP.config.globalProperties.$store = {AccessToken:false};
