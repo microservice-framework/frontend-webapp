@@ -32,7 +32,7 @@ export default {
     />
 
     <div class="wrapper">
-      <div>{{ AccessToken }}}</div>
+      <div>{{ $sources }}}</div>
       <Login :AccessToken="AccessToken"></Login>
       
       <HelloWorld msg="You did it!" />
