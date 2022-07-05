@@ -1,12 +1,5 @@
 <style scoped lang="scss" src="./Login.scss"></style>
 <template src="./Login.html"></template>
-<script setup>
-defineProps({
-  AccessToken: {
-    required: true,
-  },
-});
-</script>
 <script>
 export default {
   data() {
@@ -24,20 +17,10 @@ export default {
       }
       var client = new MicroserviceClient(clientSettings);
       client.get('','', function(err, handlerResponse){
-        console.log(err, handlerResponse);
-        if(handlerResponse.length == 0) {
-          clientSettings.secureKey = currentToken;
-          delete clientSettings.accessToken 
-          client = new MicroserviceClient(clientSettings);
-          client.get('','', function(err, handlerResponse){
-            console.log(err, handlerResponse);
-            if(handlerResponse.length) {
-              this.AccessToken.tryToken(currentToken);
-            }
-          });
-        } else {
-          self.AccessToken.tryToken(currentToken);
+        if(handlerResponse.length > 0) {
+          self.$sources.AccessToken = currentToken;
           self.$sources.services = handlerResponse;
+          self.$sources.isLogin = true
         }
       })
 

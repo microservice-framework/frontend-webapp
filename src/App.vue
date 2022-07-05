@@ -33,7 +33,7 @@ export default {
 
     <div class="wrapper">
       <div>{{ $sources }}}</div>
-      <Login :AccessToken="AccessToken"></Login>
+      <Login v-if="!$sources.isLogin"></Login>
       
       <HelloWorld msg="You did it!" />
 

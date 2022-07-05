@@ -3,6 +3,8 @@ import { createPinia } from "pinia";
 import SourcesBus from "./plugins/sources";
 
 var SourceData = {
+  isLogin: false,
+  AccessToken: '',
   services: [],
 }
 import App from "./App.vue";
