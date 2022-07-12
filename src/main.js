@@ -2,6 +2,7 @@ import { createApp } from "vue";
 //import { createPinia } from "pinia";
 import SourcesBus from "./plugins/sources";
 import PersistState from "./plugins/persist";
+import ApiClient from "./plugins/apiClient";
 
 var SourceData = {
   isLogin: false,
@@ -12,6 +13,10 @@ import App from "./App.vue";
 import router from "./router";
 
 window.APP = createApp(App);
+
+window.apiSettings = {
+  apiURL: 'http://ca.local:2100'
+}
 
 var sessionName = "API-Browser-APP";
 var defaultSettings = {
@@ -29,6 +34,7 @@ var defaultSettings = {
 window.APP.use(router);
 window.APP.use(SourcesBus, SourceData);
 window.APP.use(PersistState, sessionName, defaultSettings);
+window.APP.use(ApiClient);
 
 window.APP.mount("#app");
 

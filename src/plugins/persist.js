@@ -255,14 +255,15 @@ VuePersistState.prototype.setItem = function(state, newValue) {
 export default {
   install: (app, prefix, setDefenition) => {
 
-    app._state= false
+    app._PersistState= false
 
     var stateStorage = new VuePersistState(prefix, setDefenition);
     app.config.globalProperties['$state'] = reactive(stateStorage.state)
     app.mixin({
       created: function beforeCreate () {
-        if(!app._state) {
-          app._state = true;
+        if(!app._PersistState) {
+          app._PersistState = true;
+          app.$state = this.$state;
           var watchers = getWatch(stateStorage, setDefenition);
           for(var name in watchers) {
             this.$watch(name, watchers[name]);
