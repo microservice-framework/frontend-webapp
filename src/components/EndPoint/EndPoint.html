@@ -1,0 +1,75 @@
+<div class="col-xs-12">
+  <div class="col-xs-12">
+    <span class="title">
+      <i class="fa fa-circle-o" aria-hidden="true"></i> /{{ EndPoint.path}}
+      <span class="badge bg-success version">v: {{ EndPoint.options.version}}</span>
+      <span class="badge bg-dark scope">scope: {{ EndPoint.scope}}
+      </span>
+    </span>
+    <p class="description">{{ EndPoint.options.description}}</p>
+  </div>
+<div v-if="EndPoint.options.methods.POST" class="col-xs-12 method method-POST">
+  <span class="title">
+    <i class="fa fa-minus" aria-hidden="true"></i> <i class="fa fa-minus" aria-hidden="true"></i>
+    <span class="operation">
+      <a href="" class="try" data-url="/auth" data-method="POST" data-secure-key="4c5a72b979715852ce51930c8f7ab94d17ea6cf053067eda">
+      POST
+          
+      <i class="fa fa-external-link" aria-hidden="true"></i>
+      </a>
+    </span>
+  </span>
+  <p class="description">{{EndPoint.options.methods.POST.description}}</p>
+</div>
+<div v-if="EndPoint.options.methods.GET"  class="col-xs-12 method method-GET">
+  <span class="title">
+    <i class="fa fa-minus" aria-hidden="true"></i> <i class="fa fa-minus" aria-hidden="true"></i>
+    <span class="operation">
+      <a href="" class="try" data-url="/auth" data-method="GET" data-secure-key="4c5a72b979715852ce51930c8f7ab94d17ea6cf053067eda">
+        GET /:{{ EndPoint.options.id.title }}
+        <i class="fa fa-external-link" aria-hidden="true"></i>
+      </a>
+    </span>
+  </span>
+  <p class="description">{{EndPoint.options.methods.GET.description}}</p>
+</div>
+<div  v-if="EndPoint.options.methods.PUT" class="col-xs-12 method method-PUT">
+  <span class="title">
+    <i class="fa fa-minus" aria-hidden="true"></i> <i class="fa fa-minus" aria-hidden="true"></i>
+    <span class="operation">
+      <a href="" class="try" data-url="/auth" data-method="PUT" data-secure-key="4c5a72b979715852ce51930c8f7ab94d17ea6cf053067eda">
+        PUT /:{{ EndPoint.options.id.title }}
+        
+        <i class="fa fa-external-link" aria-hidden="true"></i>
+      </a>
+    </span>
+  </span>
+  <p class="description">{{EndPoint.options.methods.PUT.description}}</p>
+</div>
+<div  v-if="EndPoint.options.methods.DELETE" class="col-xs-12 method method-DELETE">
+  <span class="title">
+    <i class="fa fa-minus" aria-hidden="true"></i> <i class="fa fa-minus" aria-hidden="true"></i>
+    <span class="operation">
+      <a href="" class="try" data-url="/auth" data-method="DELETE" data-secure-key="4c5a72b979715852ce51930c8f7ab94d17ea6cf053067eda">
+        DELETE /:{{ EndPoint.options.id.title }}
+        
+        <i class="fa fa-external-link" aria-hidden="true"></i>
+      </a>
+    </span>
+  </span>
+  <p class="description">{{EndPoint.options.methods.DELETE.description}}</p>
+</div>
+<div  v-if="EndPoint.options.methods.SEARCH" class="col-xs-12 method method-SEARCH">
+  <span class="title">
+    <i class="fa fa-minus" aria-hidden="true"></i> <i class="fa fa-minus" aria-hidden="true"></i>
+    <span class="operation">
+      <a href="" class="try" data-url="/auth" data-method="SEARCH" data-secure-key="4c5a72b979715852ce51930c8f7ab94d17ea6cf053067eda">
+        SEARCH
+        
+        <i class="fa fa-external-link" aria-hidden="true"></i>
+      </a>
+    </span>
+  </span>
+  <p class="description">{{EndPoint.options.methods.SEARCH.description}}</p>
+</div>
+</div>

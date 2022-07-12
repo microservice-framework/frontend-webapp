@@ -1,8 +1,8 @@
 <script setup>
-import { RouterLink, RouterView } from "vue-router";
-import HelloWorld from "@/components/HelloWorld.vue";
+import { createRouter, createWebHistory } from "vue-router";
+
 import Login from '@/components/Login/Login.vue';
-import { useAppStore } from '@/stores/app';
+//import { useAppStore } from '@/stores/app';
 
 </script>
 <script>
@@ -11,7 +11,7 @@ export default {
   // and will be exposed on `this`.
   data() {
     return {
-      AccessToken: useAppStore()
+    //  AccessToken: useAppStore()
     }
   },
   mounted(){
@@ -22,29 +22,15 @@ export default {
 </script>
 
 <template>
-  <header>
-    <img
-      alt="Vue logo"
-      class="logo"
-      src="@/assets/logo.svg"
-      width="125"
-      height="125"
-    />
-
     <div class="wrapper">
-      <div>{{ $sources }}}</div>
+      <!--div>{{ $sources }}}</!--div-->
+      <RouterView/>
       <Login v-if="!$sources.isLogin"></Login>
-      
-      <HelloWorld msg="You did it!" />
-
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
       </nav>
     </div>
-  </header>
-
-  <RouterView />
 </template>
 
 <style>
@@ -142,5 +128,21 @@ nav a:first-of-type {
     padding: 1rem 0;
     margin-top: 1rem;
   }
+}
+.root {
+  position: relative;
+  padding: 2em 0;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  border-bottom: 1px solid #ccc;
+}
+.root::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 18px;
+  height: 100%;
+  width: 2px;
+  background: #d7e4ed;
 }
 </style>

@@ -1,5 +1,5 @@
 import { createApp } from "vue";
-import { createPinia } from "pinia";
+//import { createPinia } from "pinia";
 import SourcesBus from "./plugins/sources";
 
 var SourceData = {
@@ -12,7 +12,7 @@ import router from "./router";
 
 window.APP = createApp(App);
 
-window.APP.use(createPinia());
+//window.APP.use(createPinia());
 window.APP.use(router);
 window.APP.use(SourcesBus, SourceData);
 

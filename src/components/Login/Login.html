@@ -3,11 +3,12 @@
     <div class="shield">
       <i class="fa fa-lock" aria-hidden="true"></i>
     </div>
-    <div>{{ AccessToken }}</div>
+    
+    <pre>{{$sources}}</pre>
     <p>Access Token or Secure KEY required to navigate API.</p>
   </center>
   <div class="input-group">
-    <pre>{{store}}</pre>
+    
     <input class="form-control" placeholder="Access Token" v-model="token">
     <span class="input-group-btn">
     <button type="submit" class="btn btn-success" v-on:click="submitToken">Submit</button>
