@@ -1,5 +1,4 @@
 <script setup>
-
 import EndPoint from '@/components/EndPoint/EndPoint.vue';
 </script>
 
