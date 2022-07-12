@@ -22,6 +22,7 @@ export default {
         if(handlerResponse.length > 0) {
           console.log("2", self.$sources, self.token);
           self.$sources.AccessToken = currentToken;
+          self.$state.accessToken = currentToken;
           self.$sources.services = handlerResponse;
           self.$sources.isLogin = true
         }

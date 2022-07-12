@@ -15,6 +15,23 @@ export default {
     }
   },
   mounted(){
+    if(this.$state.accessToken) {
+      var self = this;
+      self.$sources.isLogin = true
+      var clientSettings = {
+        URL: "http://ca.local:2100",
+        accessToken: this.$state.accessToken
+      }
+      var client = new MicroserviceClient(clientSettings);
+      client.get('','', function(err, handlerResponse){
+         console.log("2.1",err, handlerResponse);
+        if(handlerResponse.length > 0) {
+          console.log("2", self.$sources, self.token);
+          self.$sources.services = handlerResponse;
+          
+        }
+      })
+    }
     //const store = useAppStore();
     //this.$store.AccessToken = store;
   }
