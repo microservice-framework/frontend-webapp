@@ -9,7 +9,7 @@ import EndPoint from '@/components/EndPoint/EndPoint.vue';
         v-for="item in $sources.services"
         :key="item.path"
         class="row path">
-        <EndPoint :EndPoint="item"></EndPoint>
+        <EndPoint v-if="item.options" :EndPoint="item"></EndPoint>
       </div>
     </div>
     
