@@ -1,7 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
 
-import Login from "@/components/Login/Login.vue";
+import Login from "@/components/LoginForm/LoginForm.vue";
 //import { useAppStore } from '@/stores/app';
 </script>
 <script>

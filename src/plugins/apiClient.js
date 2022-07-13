@@ -1,3 +1,5 @@
+/*global MicroserviceClient*/
+
 function getWatch() {
   return {
     "$api.client": function (newValue, oldValue) {
@@ -14,7 +16,7 @@ function getWatch() {
     },
     "$state.accessToken": function (newValue) {
       this.$api.client = new MicroserviceClient({
-        URL: apiSettings.apiURL,
+        URL: this.$api.url,
         accessToken: newValue,
       });
     },
@@ -42,30 +44,28 @@ function getWatch() {
   };
 }
 
-function testAccessToken(AccessToken, callback) {
-  var client = new MicroserviceClient({
-    URL: apiSettings.apiURL,
-    accessToken: AccessToken,
-    headers: { scope: "auth" },
-  });
-  client.get("auth/" + AccessToken, function (err, handlerResponse) {
-    console.log(err, handlerResponse);
-    if (callback) {
-      callback(err, handlerResponse);
-    }
-  });
-}
-
 import { reactive } from "vue";
 
 export default {
-  install: (app, options) => {
+  install: (app, apiSettings) => {
     var api = {
       online: false,
       client: false,
       timerApiClient: false,
       url: apiSettings.apiURL,
-      testAccessToken: testAccessToken,
+      testAccessToken: function (AccessToken, callback) {
+        var client = new MicroserviceClient({
+          URL: apiSettings.apiURL,
+          accessToken: AccessToken,
+          headers: { scope: "auth" },
+        });
+        client.get("auth/" + AccessToken, function (err, handlerResponse) {
+          console.log(err, handlerResponse);
+          if (callback) {
+            callback(err, handlerResponse);
+          }
+        });
+      },
     };
     app._APIState = false;
     // inject a globally available $translate() method
