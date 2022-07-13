@@ -45,10 +45,7 @@ export default {
       }
     },
   },
-  mounted() {
-    if (this.$state.accessToken) {
-    }
-  },
+  mounted() {},
 };
 </script>
 
