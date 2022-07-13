@@ -6,29 +6,29 @@ import ApiClient from "./plugins/apiClient";
 
 var SourceData = {
   isLogin: false,
-  AccessToken: '',
+  AccessToken: "",
   services: [],
-}
+};
 import App from "./App.vue";
 import router from "./router";
 
 window.APP = createApp(App);
 
 window.apiSettings = {
-  apiURL: 'http://ca.local:2100'
-}
+  apiURL: "http://ca.local:2100",
+};
 
 var sessionName = "API-Browser-APP";
 var defaultSettings = {
   accessToken: {
-    type: 'string',
-    default: '',
+    type: "string",
+    default: "",
   },
   expireAt: {
-    type: 'number',
+    type: "number",
     default: 0,
   },
-}
+};
 
 //window.APP.use(createPinia());
 window.APP.use(router);

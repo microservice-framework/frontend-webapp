@@ -11,11 +11,9 @@ defineProps({
 export default {
   data() {
     return {
-      token: ''
-    }
+      token: "",
+    };
   },
-  methods: {
-
-  }
-}
+  methods: {},
+};
 </script>

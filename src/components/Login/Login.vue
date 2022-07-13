@@ -4,32 +4,30 @@
 export default {
   data() {
     return {
-      token: ''
-    }
+      token: "",
+    };
   },
   methods: {
-    submitToken: function(){
+    submitToken: function () {
       console.log("1", this.$sources, this.token);
       var self = this;
       var currentToken = this.token;
       var clientSettings = {
         URL: "http://ca.local:2100",
-        accessToken: currentToken
-      }
+        accessToken: currentToken,
+      };
       var client = new MicroserviceClient(clientSettings);
-      client.get('','', function(err, handlerResponse){
-         console.log("2.1",err, handlerResponse);
-        if(handlerResponse.length > 0) {
+      client.get("", "", function (err, handlerResponse) {
+        console.log("2.1", err, handlerResponse);
+        if (handlerResponse.length > 0) {
           console.log("2", self.$sources, self.token);
           self.$sources.AccessToken = currentToken;
           self.$state.accessToken = currentToken;
           self.$sources.services = handlerResponse;
-          self.$sources.isLogin = true
+          self.$sources.isLogin = true;
         }
-      })
-
-      
-    }
-  }
-}
+      });
+    },
+  },
+};
 </script>

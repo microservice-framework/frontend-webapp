@@ -11,8 +11,8 @@ export const useAppStore = defineStore({
     AccessToken: (state) => state.token,
   },
   actions: {
-    tryToken(token){
-      this.token = token
-    }
-  }
+    tryToken(token) {
+      this.token = token;
+    },
+  },
 });

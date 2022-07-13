@@ -1,9 +1,8 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
 
-import Login from '@/components/Login/Login.vue';
+import Login from "@/components/Login/Login.vue";
 //import { useAppStore } from '@/stores/app';
-
 </script>
 <script>
 export default {
@@ -11,11 +10,11 @@ export default {
   // and will be exposed on `this`.
   data() {
     return {
-    //  AccessToken: useAppStore()
-    }
+      //  AccessToken: useAppStore()
+    };
   },
   watch: {
-    '$state.accessToken'(newValue) {
+    "$state.accessToken"(newValue) {
       if (newValue == 0) {
         this.$sources.isLogin = false;
         this.$sources.services = [];
@@ -32,39 +31,37 @@ export default {
         })*/
       }
     },
-    '$api.client':  function(newValue) {
-      if(newValue) {
+    "$api.client": function (newValue) {
+      if (newValue) {
         var self = this;
-        this.$api.client.get('','', function(err, handlerResponse){
-          console.log("2.1",err, handlerResponse);
-          if(handlerResponse.length > 0) {
+        this.$api.client.get("", "", function (err, handlerResponse) {
+          console.log("2.1", err, handlerResponse);
+          if (handlerResponse.length > 0) {
             console.log("2", self.$sources, self.token);
             self.$sources.services = handlerResponse;
             self.$sources.isLogin = true;
-            
           }
-        })
+        });
       }
+    },
+  },
+  mounted() {
+    if (this.$state.accessToken) {
     }
   },
-  mounted(){
-    if(this.$state.accessToken) {
-    }
-
-  }
-}
+};
 </script>
 
 <template>
-    <div class="wrapper">
-      <!--div>{{ $sources }}}</!--div-->
-      <RouterView/>
-      <Login v-if="!$sources.isLogin"></Login>
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
+  <div class="wrapper">
+    <!--div>{{ $sources }}}</!--div-->
+    <RouterView />
+    <Login v-if="!$sources.isLogin"></Login>
+    <nav>
+      <RouterLink to="/">Home</RouterLink>
+      <RouterLink to="/about">About</RouterLink>
+    </nav>
+  </div>
 </template>
 
 <style>
@@ -171,7 +168,7 @@ nav a:first-of-type {
   border-bottom: 1px solid #ccc;
 }
 .root::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 18px;

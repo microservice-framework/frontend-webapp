@@ -1,29 +1,29 @@
-function getWatch(){
+function getWatch() {
   return {
-    '$api.client':  function(newValue, oldValue) {
+    "$api.client": function (newValue, oldValue) {
       //global.debug.log('$api.client');
       if (newValue) {
         if (this.$api.online === false || oldValue == false) {
           //global.debug.log('apiClient registered', newValue, oldValue);
           this.$api.online = true;
         }
-        return 
+        return;
       }
       //global.debug.log('apiClient removed', newValue);
-      return this.$api.online = false;
+      return (this.$api.online = false);
     },
-    '$state.accessToken': function(newValue) {
+    "$state.accessToken": function (newValue) {
       this.$api.client = new MicroserviceClient({
         URL: apiSettings.apiURL,
-        accessToken: newValue
+        accessToken: newValue,
       });
     },
-    '$state.expireAt': function(newValue, oldValue) {
+    "$state.expireAt": function (newValue, oldValue) {
       if (newValue == 0) {
         this.$api.client = false;
-        return
+        return;
       }
-      if(newValue < oldValue) {
+      if (newValue < oldValue) {
         return;
       }
       if (this.$api.timerApiClient) {
@@ -31,26 +31,26 @@ function getWatch(){
       }
       var self = this;
       var period = newValue - Date.now();
-      if (period > 0 && !isNaN(period)){
+      if (period > 0 && !isNaN(period)) {
         //global.debug.log('apiClientToken expire in ', period);
-        this.$api.timerApiClient = setTimeout(function(){
+        this.$api.timerApiClient = setTimeout(function () {
           //global.debug.log('apiClientToken:expired');
           self.$state.expireAt = 0;
         }, period);
       }
-    }
-  }
+    },
+  };
 }
 
-function testAccessToken(AccessToken, callback){
+function testAccessToken(AccessToken, callback) {
   var client = new MicroserviceClient({
     URL: apiSettings.apiURL,
     accessToken: AccessToken,
-    headers: {scope: "auth"}
+    headers: { scope: "auth" },
   });
-  client.get("auth/" + AccessToken, function(err, handlerResponse){
-    console.log(err,handlerResponse);
-    if(callback) {
+  client.get("auth/" + AccessToken, function (err, handlerResponse) {
+    console.log(err, handlerResponse);
+    if (callback) {
       callback(err, handlerResponse);
     }
   });
@@ -66,35 +66,38 @@ export default {
       timerApiClient: false,
       url: apiSettings.apiURL,
       testAccessToken: testAccessToken,
-    }
-    app._APIState= false
+    };
+    app._APIState = false;
     // inject a globally available $translate() method
-    app.config.globalProperties['$api'] = reactive(api)
+    app.config.globalProperties["$api"] = reactive(api);
     app.mixin({
-      created: function beforeCreate () {
-        if(!app._APIState) {
+      created: function beforeCreate() {
+        if (!app._APIState) {
           app._APIState = true;
           app.$api = this.$api;
           var watchers = getWatch();
-          for(var name in watchers) {
+          for (var name in watchers) {
             this.$watch(name, watchers[name]);
           }
-          if(this.$state.accessToken) {
+          if (this.$state.accessToken) {
             var self = this;
-            self.$api.testAccessToken(self.$state.accessToken, function(err, answer){
-              if(!err) {
-                self.$api.client = new MicroserviceClient({
-                  URL: apiSettings.apiURL,
-                  accessToken: self.$state.accessToken
-                });
-                if(answer.expireAt) {
-                  self.$state.expireAt = answer.expireAt;
+            self.$api.testAccessToken(
+              self.$state.accessToken,
+              function (err, answer) {
+                if (!err) {
+                  self.$api.client = new MicroserviceClient({
+                    URL: apiSettings.apiURL,
+                    accessToken: self.$state.accessToken,
+                  });
+                  if (answer.expireAt) {
+                    self.$state.expireAt = answer.expireAt;
+                  }
                 }
               }
-            })
+            );
           }
         }
-      }
+      },
     });
-  }
-}
+  },
+};
