@@ -42,6 +42,20 @@ function getWatch(){
   }
 }
 
+function testAccessToken(AccessToken, callback){
+  var client = new MicroserviceClient({
+    URL: apiSettings.apiURL,
+    accessToken: AccessToken,
+    headers: {scope: "auth"}
+  });
+  client.get("auth/" + AccessToken, function(err, handlerResponse){
+    console.log(err,handlerResponse);
+    if(callback) {
+      callback(err, handlerResponse);
+    }
+  });
+}
+
 import { reactive } from "vue";
 
 export default {
@@ -51,6 +65,7 @@ export default {
       client: false,
       timerApiClient: false,
       url: apiSettings.apiURL,
+      testAccessToken: testAccessToken,
     }
     app._APIState= false
     // inject a globally available $translate() method
@@ -65,10 +80,18 @@ export default {
             this.$watch(name, watchers[name]);
           }
           if(this.$state.accessToken) {
-            this.$api.client = new MicroserviceClient({
-              URL: apiSettings.apiURL,
-              accessToken: this.$state.accessToken
-            });
+            var self = this;
+            self.$api.testAccessToken(self.$state.accessToken, function(err, answer){
+              if(!err) {
+                self.$api.client = new MicroserviceClient({
+                  URL: apiSettings.apiURL,
+                  accessToken: self.$state.accessToken
+                });
+                if(answer.expireAt) {
+                  self.$state.expireAt = answer.expireAt;
+                }
+              }
+            })
           }
         }
       }

@@ -31,23 +31,26 @@ export default {
           }
         })*/
       }
+    },
+    '$api.client':  function(newValue) {
+      if(newValue) {
+        var self = this;
+        this.$api.client.get('','', function(err, handlerResponse){
+          console.log("2.1",err, handlerResponse);
+          if(handlerResponse.length > 0) {
+            console.log("2", self.$sources, self.token);
+            self.$sources.services = handlerResponse;
+            self.$sources.isLogin = true;
+            
+          }
+        })
+      }
     }
   },
   mounted(){
     if(this.$state.accessToken) {
-      var self = this;
-      self.$sources.isLogin = true;
-      this.$api.client.get('','', function(err, handlerResponse){
-         console.log("2.1",err, handlerResponse);
-        if(handlerResponse.length > 0) {
-          console.log("2", self.$sources, self.token);
-          self.$sources.services = handlerResponse;
-          
-        }
-      })
     }
-    //const store = useAppStore();
-    //this.$store.AccessToken = store;
+
   }
 }
 </script>
