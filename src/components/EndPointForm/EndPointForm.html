@@ -1,0 +1,59 @@
+<div class="console clearfix">
+  <div class="col-xs-12">
+    <h3> <i class="fa fa-sign-in" aria-hidden="true"></i> Request </h3>
+    <div class="input-group">
+      <input id="clientpath" class="form-control" v-model="url">
+      <input id="clientsecure" type="hidden">
+      <div class="input-group-btn" :class="dropdown && 'open'" id="method-select">
+        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" v-on:click="toggleDropdown">
+          <span class="title">{{EndPoint.method}}</span> <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu ">
+          <li v-if="EndPoint.options.methods.POST">
+            <a href="#" data-method="POST" v-on:click.prevent="selectItem('POST')">POST</a>
+          </li>
+          <li v-if="EndPoint.options.methods.GET">
+            <a href="#" data-method="GET" v-on:click.prevent="selectItem('GET')">GET</a>
+          </li>
+          <li v-if="EndPoint.options.methods.PUT">
+            <a href="#" data-method="PUT" v-on:click.prevent="selectItem('PUT')">PUT</a>
+          </li>
+          <li v-if="EndPoint.options.methods.DELETE">
+            <a href="#" data-method="DELETE" v-on:click.prevent="selectItem('DELETE')">DELETE</a>
+          </li>
+          <li v-if="EndPoint.options.methods.SEARCH">
+            <a href="#" data-method="SEARCH" v-on:click.prevent="selectItem('SEARCH')">SEARCH</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="method-item method-GET method-DELETE method-PUT" style="display: none;">
+      <div class="form-group">
+        <label for="recordid">ID</label>
+        <input class="form-control" id="recordid">
+      </div>
+    </div>
+    <div class="method-item isSecureKey method-GET method-DELETE method-PUT" style="display: none;">
+      <div class="form-group">
+        <label for="token">Token</label>
+        <input class="form-control" id="recordtoken" v-model="recordToken">
+      </div>
+    </div>
+    <div class="method-item" v-if="['POST', 'SEARCH', 'PUT'].indexOf(EndPoint.method) !== -1">
+      <div class="form-group">
+        <label for="data">Data</label>
+        <textarea class="form-control" id="data" rows="10" v-model="requestBody">{}</textarea>
+        <div class="textarea-description">{{requestAnswerError}}</div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-success client-request" v-on:click="doRequest" :class="isProcessing && 'disabled'">
+      <span v-if="!isProcessing">Submit</span>
+      <span v-if="isProcessing">Processing</span>
+    </button>
+  </div>
+  <div class="col-xs-12">
+    <hr>
+    <h3 id="answer"> <i class="fa fa-sign-out" aria-hidden="true"></i> Answer </h3>
+    <pre id="result">{{requestAnswer}}</pre>
+  </div>
+</div>

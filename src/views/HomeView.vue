@@ -1,5 +1,6 @@
 <script setup>
 import EndPoint from "@/components/EndPoint/EndPoint.vue";
+import EndPointForm from "@/components/EndPointForm/EndPointForm.vue";
 </script>
 
 <template>
@@ -10,4 +11,7 @@ import EndPoint from "@/components/EndPoint/EndPoint.vue";
       </div>
     </div>
   </main>
+  <div v-if="$sources.service && $sources.service.method">
+    <EndPointForm :EndPoint="$sources.service"></EndPointForm>
+  </div>
 </template>
