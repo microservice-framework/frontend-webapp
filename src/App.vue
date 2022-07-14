@@ -1,9 +1,10 @@
 <style lang="scss" src="./App.scss"></style>
 <template src="./App.html"></template>
 <script setup>
+// eslint-disable-next-line no-unused-vars
 import { RouterLink, RouterView } from "vue-router";
+// eslint-disable-next-line no-unused-vars
 import Login from "@/components/LoginForm/LoginForm.vue";
-//import { useAppStore } from '@/stores/app';
 </script>
 <script>
 export default {
