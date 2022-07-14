@@ -1,0 +1,13 @@
+<header>
+  <span class="title" v-if="$sources.information.name">
+    <span v-if="$sources.information.name">{{ $sources.information.name}}</span>
+    <span v-if="$sources.information.version">v: {{$sources.information.version}}</span>
+  </span>
+  <span class="token access" v-if="$state.expireAt">{{ $state.expireAt }}</span>
+  <nav>
+    <RouterLink to="/">Home</RouterLink>
+    <RouterLink to="/about">About</RouterLink>
+  </nav>
+</header>
+<Login v-if="!$sources.isLogin"></Login>
+<RouterView v-if="$sources.isLogin"></RouterView>
