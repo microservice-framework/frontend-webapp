@@ -8,6 +8,8 @@ var SourceData = {
   isLogin: false,
   AccessToken: "",
   services: [],
+  information: {},
+  service: {},
 };
 import App from "./App.vue";
 import router from "./router";
