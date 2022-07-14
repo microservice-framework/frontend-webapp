@@ -14,6 +14,12 @@ export default {
       token: "",
     };
   },
-  methods: {},
+  methods: {
+    selectItem: function(method) {
+      this.$sources.service = this.EndPoint;
+      this.$sources.service.method = method;
+      return false;
+    }
+  },
 };
 </script>

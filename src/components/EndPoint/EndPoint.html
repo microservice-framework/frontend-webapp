@@ -12,7 +12,7 @@
   <span class="title">
     <i class="fa fa-minus" aria-hidden="true"></i> <i class="fa fa-minus" aria-hidden="true"></i>
     <span class="operation">
-      <a href="" class="try" data-url="/auth" data-method="POST" data-secure-key="4c5a72b979715852ce51930c8f7ab94d17ea6cf053067eda">
+      <a href="" v-on:click.prevent="selectItem('POST')" class="try" data-url="/auth" data-method="POST" data-secure-key="4c5a72b979715852ce51930c8f7ab94d17ea6cf053067eda">
       POST
           
       <i class="fa fa-external-link" aria-hidden="true"></i>
@@ -25,7 +25,7 @@
   <span class="title">
     <i class="fa fa-minus" aria-hidden="true"></i> <i class="fa fa-minus" aria-hidden="true"></i>
     <span class="operation">
-      <a href="" class="try" data-url="/auth" data-method="GET" data-secure-key="4c5a72b979715852ce51930c8f7ab94d17ea6cf053067eda">
+      <a href="" v-on:click.prevent="selectItem('GET')" class="try" data-url="/auth" data-method="GET" data-secure-key="4c5a72b979715852ce51930c8f7ab94d17ea6cf053067eda">
         GET /:{{ EndPoint.options.id.title }}
         <i class="fa fa-external-link" aria-hidden="true"></i>
       </a>
@@ -37,7 +37,7 @@
   <span class="title">
     <i class="fa fa-minus" aria-hidden="true"></i> <i class="fa fa-minus" aria-hidden="true"></i>
     <span class="operation">
-      <a href="" class="try" data-url="/auth" data-method="PUT" data-secure-key="4c5a72b979715852ce51930c8f7ab94d17ea6cf053067eda">
+      <a href="" v-on:click.prevent="selectItem('PUT')" class="try" data-url="/auth" data-method="PUT" data-secure-key="4c5a72b979715852ce51930c8f7ab94d17ea6cf053067eda">
         PUT /:{{ EndPoint.options.id.title }}
         
         <i class="fa fa-external-link" aria-hidden="true"></i>
@@ -50,7 +50,7 @@
   <span class="title">
     <i class="fa fa-minus" aria-hidden="true"></i> <i class="fa fa-minus" aria-hidden="true"></i>
     <span class="operation">
-      <a href="" class="try" data-url="/auth" data-method="DELETE" data-secure-key="4c5a72b979715852ce51930c8f7ab94d17ea6cf053067eda">
+      <a href="" v-on:click.prevent="selectItem('DELETE')" class="try" data-url="/auth" data-method="DELETE" data-secure-key="4c5a72b979715852ce51930c8f7ab94d17ea6cf053067eda">
         DELETE /:{{ EndPoint.options.id.title }}
         
         <i class="fa fa-external-link" aria-hidden="true"></i>
@@ -63,7 +63,7 @@
   <span class="title">
     <i class="fa fa-minus" aria-hidden="true"></i> <i class="fa fa-minus" aria-hidden="true"></i>
     <span class="operation">
-      <a href="" class="try" data-url="/auth" data-method="SEARCH" data-secure-key="4c5a72b979715852ce51930c8f7ab94d17ea6cf053067eda">
+      <a href="" v-on:click.prevent="selectItem('SEARCH')" class="try" data-url="/auth" data-method="SEARCH" data-secure-key="4c5a72b979715852ce51930c8f7ab94d17ea6cf053067eda">
         SEARCH
         
         <i class="fa fa-external-link" aria-hidden="true"></i>
