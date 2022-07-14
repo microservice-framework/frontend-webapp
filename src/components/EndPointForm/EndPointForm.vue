@@ -58,10 +58,19 @@ export default {
           return;
         }
       }
+      var clientSettings = {
+        URL: this.$api.url,
+      }
+      if(self.EndPoint.secureKey) {
+        clientSettings.secureKey = self.EndPoint.secureKey;
+      } else {
+        clientSettings.accessToken = self.$state.accessToken;
+      }
+      var client = new MicroserviceClient(clientSettings);
       switch(this.EndPoint.method){
         case 'POST': {
           self.isProcessing = true;
-          this.$api.client.post(data, function(err, handlerResponse){
+          client.post(data, function(err, handlerResponse){
             self.isProcessing = false;
             if(err){
               return self.requestAnswer = err;
@@ -75,7 +84,7 @@ export default {
           self.isProcessing = true;
           if(self.EndPoint.secureKey){
             console.log("GET(self.EndPoint.secureKey): " +self.EndPoint.secureKey + ' ' + self.url + '/' + self.recordToken);
-            return self.$api.client.get(self.url, self.recordToken, function(err, handlerResponse){
+            return client.get(self.url, self.recordToken, function(err, handlerResponse){
               self.isProcessing = false;
               if(err){
                 return self.requestAnswer = err;
@@ -83,7 +92,7 @@ export default {
               self.requestAnswer = JSON.stringify(handlerResponse, null, 2);
             });
           }
-          self.$api.client.get(self.url, function(err, handlerResponse){
+          client.get(self.url, function(err, handlerResponse){
             self.isProcessing = false;
             if(err){
               return self.requestAnswer = err;
@@ -96,7 +105,7 @@ export default {
         case 'PUT': {
           self.isProcessing = true;
           if(self.EndPoint.secureKey){
-            return self.$api.client.put(self.url, self.recordToken, data, function(err, handlerResponse){
+            return client.put(self.url, self.recordToken, data, function(err, handlerResponse){
               self.isProcessing = false;
               if(err){
                 return self.requestAnswer = err;
@@ -105,7 +114,7 @@ export default {
             });
           }
 
-          self.$api.client.put(self.url, data, function(err, handlerResponse){
+          client.put(self.url, data, function(err, handlerResponse){
             self.isProcessing = false;
             if(err){
               return self.requestAnswer = err;
@@ -117,7 +126,7 @@ export default {
         case 'DELETE': {
           self.isProcessing = true;
           if(self.EndPoint.secureKey){
-            return self.$api.client.delete(self.url, self.recordToken, function(err, handlerResponse){
+            return client.delete(self.url, self.recordToken, function(err, handlerResponse){
               self.isProcessing = false;
               if(err){
                 return self.requestAnswer = err;
@@ -125,7 +134,7 @@ export default {
               self.requestAnswer = JSON.stringify(handlerResponse, null, 2);
             });
           }
-          self.$api.client.delete(self.url, function(err, handlerResponse){
+          client.delete(self.url, function(err, handlerResponse){
             self.isProcessing = false;
             if(err){
               return self.requestAnswer = err;
@@ -137,7 +146,7 @@ export default {
         }
         case 'SEARCH': {
           self.isProcessing = true;
-          self.$api.client.search(self.url, data, function(err, handlerResponse){
+          client.search(self.url, data, function(err, handlerResponse){
             self.isProcessing = false;
             if(err){
               return self.requestAnswer = err;
