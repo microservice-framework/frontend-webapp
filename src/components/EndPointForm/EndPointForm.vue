@@ -22,8 +22,11 @@ export default {
     };
   },
   watch: {
-    "EndPoint.path"(newValue) {
+    "EndPoint.method"(newValue) {
       this.url = this.EndPoint.path;
+      if(['PUT', 'DELETE', 'GET'].indexOf(this.EndPoint.method) !== -1) {
+        this.url = this.url + '/:' + this.EndPoint.options.id.title
+      }
     }
   },
   computed: {
@@ -55,6 +58,65 @@ export default {
       if(['PUT', 'DELETE', 'GET'].indexOf(this.EndPoint.method) !== -1) {
         this.url = this.EndPoint.path + '/:' + this.EndPoint.options.id.title
       }
+      if('SEARCH' == this.EndPoint.method) {
+        this.requestBody = '{\n "query":{},\n "limit":10\n}';
+      }
+      if('POST' == this.EndPoint.method) {
+        var parseProperty = function(property) {
+          var returnValue = false;
+          switch(property.type) {
+            case 'number':
+            case 'boolean':
+            case 'string': {
+                returnValue = '' + property.type.toUpperCase() + ': ';
+                if(property.required) {
+                  returnValue = returnValue + '[required] ';
+                }
+                return returnValue + property.description;
+                break;
+              }
+            case 'object': {
+              returnValue = {};
+              if(property.properties) {
+                for(var name in property.properties) {
+                  var value = parseProperty(property.properties[name]);
+                  if(value !== false) {
+                    returnValue[name] = value;
+                  }
+                }
+                return returnValue;
+              }
+              if(property.required) {
+                return returnValue;
+              }
+              return false;
+            }
+            case 'array': {
+              returnValue = [];
+              var item = parseProperty(property.items);
+              if(item !== false) {
+                returnValue.push(item);
+              }
+              return returnValue;
+            }
+          }
+        }
+        var postObject = {};
+        for(var name in this.EndPoint.options.properties) {
+          if(name == 'created' || name == 'changed') {
+            continue;
+          }
+          var property = parseProperty( this.EndPoint.options.properties[name]);
+          if(property !== false) {
+            postObject[name] = property
+          }
+        }
+        try{
+          this.requestBody = JSON.stringify(postObject, null, 2)
+        } catch(e) {
+          this.requestBody = JSON.stringify(e, null, 2)
+        }
+      }
     },
     doRequest: function(){
       var self = this;
@@ -81,7 +143,7 @@ export default {
       switch(this.EndPoint.method){
         case 'POST': {
           self.isProcessing = true;
-          client.post(data, function(err, handlerResponse){
+          client.post(self.url, data, function(err, handlerResponse){
             self.isProcessing = false;
             if(err){
               return self.requestAnswer = err;
