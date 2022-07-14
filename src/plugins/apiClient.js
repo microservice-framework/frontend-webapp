@@ -85,10 +85,15 @@ export default {
               self.$state.accessToken,
               function (err, answer) {
                 if (!err) {
-                  self.$api.client = new MicroserviceClient({
+                  var clientSettings = {
                     URL: apiSettings.apiURL,
-                    accessToken: self.$state.accessToken,
-                  });
+                  }
+                  if(answer.secureKey) {
+                    clientSettings.secureKey = answer.secureKey;
+                  } else {
+                    clientSettings.accessToken = self.$state.accessToken;
+                  }
+                  self.$api.client = new MicroserviceClient(clientSettings);
                   if (answer.expireAt) {
                     self.$state.expireAt = answer.expireAt;
                   }
