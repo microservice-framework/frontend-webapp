@@ -27,13 +27,7 @@
         </ul>
       </div>
     </div>
-    <div class="method-item method-GET method-DELETE method-PUT" style="display: none;">
-      <div class="form-group">
-        <label for="recordid">ID</label>
-        <input class="form-control" id="recordid">
-      </div>
-    </div>
-    <div class="method-item isSecureKey method-GET method-DELETE method-PUT" style="display: none;">
+    <div class="method-item isSecureKey method-GET method-DELETE method-PUT" v-if="isShowTokenField">
       <div class="form-group">
         <label for="token">Token</label>
         <input class="form-control" id="recordtoken" v-model="recordToken">

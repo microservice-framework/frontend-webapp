@@ -26,6 +26,17 @@ export default {
       this.url = this.EndPoint.path;
     }
   },
+  computed: {
+    "isShowTokenField": function(){
+      if(['PUT', 'DELETE', 'GET'].indexOf(this.EndPoint.method) == -1) {
+        return false;
+      }
+      if(this.EndPoint.secureKey) {
+        return true;
+      }
+      return false;
+    }
+  },  
   mounted() {
     this.url = this.EndPoint.path;
     if(['PUT', 'DELETE', 'GET'].indexOf(this.EndPoint.method) !== -1) {
