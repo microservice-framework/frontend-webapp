@@ -1,7 +1,7 @@
 <header>
-  <span class="title" v-if="$sources.information.name">
-    <span v-if="$sources.information.name">{{ $sources.information.name}}</span>
-    <span v-if="$sources.information.version">v: {{$sources.information.version}}</span>
+  <span class="title" v-if="$dataset.information.name">
+    <span v-if="$dataset.information.name">{{ $dataset.information.name}}</span>
+    <span v-if="$dataset.information.version">v: {{$dataset.information.version}}</span>
   </span>
   <span class="token access" v-if="$state.expireAt">{{ $state.expireAt }}</span>
   <nav>

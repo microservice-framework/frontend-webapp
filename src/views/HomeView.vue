@@ -5,8 +5,8 @@ import EndPointForm from "@/components/EndPointForm/EndPointForm.vue";
 
 <template>
   <main>
-    <div v-if="$sources.services.length" class="root">
-      <div v-for="item in $sources.services" :key="item.path" class="row path">
+    <div v-if="$dataset.services.length" class="root">
+      <div v-for="item in $dataset.services" :key="item.path" class="row path">
         <EndPoint v-if="item.options" :EndPoint="item"></EndPoint>
       </div>
     </div>

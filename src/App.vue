@@ -25,15 +25,8 @@ export default {
     "$api.client": function (newValue) {
       if (newValue) {
         var self = this;
-        this.$api.client.get("", "", function (err, handlerResponse) {
-          console.log("2.1", err, handlerResponse);
-          if (handlerResponse.length > 0) {
-            console.log("2", self.$sources, self.token);
-            self.$sources.information = handlerResponse.pop();
-            self.$dataset.services = handlerResponse;
-            self.$sources.isLogin = true;
-          }
-        });
+        this.$dataset.services.refresh();
+        self.$sources.isLogin = true;
       }
     },
   },
