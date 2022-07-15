@@ -5,6 +5,22 @@ function DataSetState(app, setDefenition) {
   this.app = app;
   var self = this;
   self._dataset = {};
+
+  var setDataItem = function(self, definition, dataset) {
+    var _refresh = function(){
+      if(definition.provider) {
+        definition.provider(self.app, function(update){
+          //_self.value = update;
+          self.app['$dataset'][dataset] = reactive(update);
+          self._dataset[dataset]['refresh'] = _refresh;
+        })
+        return true;
+      }
+      return false;
+    }
+    self._dataset[dataset] = reactive(newValue);
+    self._dataset[dataset]['refresh'] = _refresh
+  }
   
   for (var dataset in this.setDefenition) {
     var newValue = self.getItem(dataset);
@@ -20,20 +36,7 @@ function DataSetState(app, setDefenition) {
         break;
       }
     }
-    var _refresh = function(){
-      if(definition.provider) {
-        //var _self = this;
-        definition.provider(self.app, function(update){
-          //_self.value = update;
-          self.app['$dataset'][dataset] = reactive(update);
-          self._dataset[dataset]['refresh'] = _refresh;
-        })
-        return true;
-      }
-      return false;
-    }
-    self._dataset[dataset] = reactive(newValue);
-    self._dataset[dataset]['refresh'] = _refresh
+    setDataItem(self, definition, dataset)
   }
   this.dataset = new Proxy(this._dataset, {
     set: function(obj, prop, value) {
