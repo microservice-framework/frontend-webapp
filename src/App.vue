@@ -30,7 +30,7 @@ export default {
           if (handlerResponse.length > 0) {
             console.log("2", self.$sources, self.token);
             self.$sources.information = handlerResponse.pop();
-            self.$sources.services = handlerResponse;
+            self.$dataset.services = handlerResponse;
             self.$sources.isLogin = true;
           }
         });

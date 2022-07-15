@@ -40,9 +40,8 @@ function DataSetState(app, setDefenition) {
         if(definition.provider) {
           //var _self = this;
           definition.provider(self.app, function(update){
-            //_self.value = update;
-            obj[prop] = reactive(update);
-            obj[prop]['refresh'] = _refresh;
+            self.app['$dataset'][prop] = reactive(update);
+            self._dataset[prop]['refresh'] = _refresh;
           })
         }
       }
@@ -63,13 +62,13 @@ DataSetState.prototype.refresh = function (dataset) {
         //var _self = this;
         definition.provider(self.app, function(update){
           //_self.value = update;
-          self._dataset[dataset] = reactive(update);
+          self.app['$dataset'][dataset] = reactive(update);
           self._dataset[dataset]['refresh'] = _refresh;
         })
       }
     }
     definition.provider(self.app, function(update){
-      self._dataset[dataset] = update;
+      self.app['$dataset'][dataset] = update;
       self._dataset[dataset]['refresh'] = _refresh;
     })
     return true;
