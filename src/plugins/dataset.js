@@ -28,7 +28,9 @@ function DataSetState(app, setDefenition) {
           self.app['$dataset'][dataset] = reactive(update);
           self._dataset[dataset]['refresh'] = _refresh;
         })
+        return true;
       }
+      return false;
     }
     self._dataset[dataset] = reactive(newValue);
     self._dataset[dataset]['refresh'] = _refresh
@@ -43,7 +45,9 @@ function DataSetState(app, setDefenition) {
             self.app['$dataset'][prop] = reactive(update);
             self._dataset[prop]['refresh'] = _refresh;
           })
+          return true;
         }
+        return false;
       }
       obj[prop] = reactive(value);
       obj[prop]['refresh'] = _refresh;
@@ -56,6 +60,9 @@ function DataSetState(app, setDefenition) {
 DataSetState.prototype.refresh = function (dataset) {
   var definition = this.setDefenition[dataset];
   var self = this;
+  if(!definition) {
+    return false;
+  }
   if(definition.provider) {
     var _refresh = function(){
       if(definition.provider) {
@@ -119,6 +126,7 @@ export default {
     // inject a globally available $translate() method
     var datasetStorage = new DataSetState(app, options);
     app.config.globalProperties["$dataset"] = reactive(datasetStorage.dataset);
+    app.config.globalProperties["$dataset"]['refresh'] = function(dataset){ return datasetStorage.refresh(dataset)};
     app.mixin({
       created: function beforeCreate() {
         if (!app._DataSetState) {
