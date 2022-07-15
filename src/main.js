@@ -72,5 +72,3 @@ window.APP.use(DatasetState, defaultDataSet);
 window.APP.use(ApiClient, apiSettings);
 
 window.APP.mount("#app");
-
-//window.APP.config.globalProperties.$store = {AccessToken:false};

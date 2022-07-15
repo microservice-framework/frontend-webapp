@@ -1,4 +1,3 @@
-
 .path {
   padding-bottom: 25px;
 }
@@ -15,12 +14,12 @@
 }
 
 .path:hover .title .fa {
-  color: #444;
+  color: var(--color-default-dark);
 }
 
 .path .title .badge {
   background: #eee;
-  color: #444;
+  color: var(--color-default-dark);
   float: right;
   margin: 0px 5px;
 }
@@ -31,7 +30,7 @@
 }
 
 .path .title .badge.scope {
-  background: #444;
+  background: var(--color-default-dark);
   color: white;
 }
 
@@ -41,22 +40,22 @@
 }
 
 .method-GET .description {
-  color: #3c8ce7;
+  color: var(--color-get);
 }
 .method-POST .description {
-  color: #3ce870;
+  color: var(--color-post);
 }
 
 .method-PUT .description {
-  color: #e8ce3c;
+  color: var(--color-put);
 }
 
 .method-DELETE .description {
-  color: #e8563c;
+  color: var(--color-delete);
 }
 
 .method-SEARCH .description {
-  color: #ac3ce8;
+  color: var(--color-search);
 }
 
 .method {
@@ -66,7 +65,7 @@
 .method .title {
   background-color: transparent;
   padding-left: 18px;
-  color: #444;
+  color: var(--color-default-dark);
   font-weight: 300;
 }
 .method .title .opeartion{
@@ -87,7 +86,7 @@
 
 
 a.try {
-  color: #444;
+  color: var(--color-default-dark);
 
 }
 a.try .fa {
