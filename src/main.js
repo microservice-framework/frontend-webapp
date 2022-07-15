@@ -37,38 +37,38 @@ var defaultDataSet = {
   information: {
     type: "object",
     default: {
-      name: 'API browser',
-      description: '',
-      version: 'unknown',
+      name: "API browser",
+      description: "",
+      version: "unknown",
     },
-    provider: function(app, callback){
+    provider: function (app, callback) {
       app.$api.client.get("", "", function (err, handlerResponse) {
         if (handlerResponse.length > 0) {
           var information = handlerResponse.pop();
-          callback(information)
+          callback(information);
         }
       });
-    }
+    },
   },
   services: {
     type: "array",
     default: [],
-    provider: function(app, callback){
+    provider: function (app, callback) {
       app.$api.client.get("", "", function (err, handlerResponse) {
         if (handlerResponse.length > 0) {
           app.$dataset.information = handlerResponse.pop();
-          callback(handlerResponse)
+          callback(handlerResponse);
         }
       });
-    }
-  }
-}
+    },
+  },
+};
 
 //window.APP.use(createPinia());
 window.APP.use(router);
 window.APP.use(SourcesBus, SourceData);
 window.APP.use(PersistState, sessionName, defaultSettings);
-window.APP.use(DatasetState, defaultDataSet)
+window.APP.use(DatasetState, defaultDataSet);
 window.APP.use(ApiClient, apiSettings);
 
 window.APP.mount("#app");
