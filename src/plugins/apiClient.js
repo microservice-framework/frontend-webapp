@@ -3,24 +3,24 @@
 function getWatch() {
   return {
     "$api.client": function (newValue, oldValue) {
-      //global.debug.log('$api.client');
       if (newValue) {
         if (this.$api.online === false || oldValue == false) {
-          //global.debug.log('apiClient registered', newValue, oldValue);
           this.$api.online = true;
         }
         return;
       }
-      //global.debug.log('apiClient removed', newValue);
-      return (this.$api.online = false);
+      this.$api.online = false;
     },
-    "$state.accessToken": function (newValue) {
-      this.$api.client = new MicroserviceClient({
-        URL: this.$api.url,
-        accessToken: newValue,
-      });
+    "$api.accessToken": function (newValue) {
+      if(newValue) {
+        return this.$api.client = new MicroserviceClient({
+          URL: this.$api.url,
+          accessToken: newValue,
+        });
+      }
+      this.$api.client = false;
     },
-    "$state.expireAt": function (newValue, oldValue) {
+    "$api.expireAt": function (newValue, oldValue) {
       if (newValue == 0) {
         this.$api.client = false;
         return;
@@ -34,10 +34,8 @@ function getWatch() {
       var self = this;
       var period = newValue - Date.now();
       if (period > 0 && !isNaN(period)) {
-        //global.debug.log('apiClientToken expire in ', period);
         this.$api.timerApiClient = setTimeout(function () {
-          //global.debug.log('apiClientToken:expired');
-          self.$state.expireAt = 0;
+          self.$api.expireAt = 0;
         }, period);
       }
     },
@@ -53,6 +51,12 @@ export default {
       client: false,
       timerApiClient: false,
       url: apiSettings.apiURL,
+      accessToken: '',
+      expireAt: 0,
+      setAccessToken: function(setValue) {
+        this.accessToken = setValue.accessToken;
+        this.expireAt = setValue.expireAt;
+      },
       testAccessToken: function (AccessToken, callback) {
         var client = new MicroserviceClient({
           URL: apiSettings.apiURL,
@@ -67,8 +71,15 @@ export default {
         });
       },
     };
+    if(apiSettings.methods) {
+      for(var i in apiSettings.methods) {
+        var method = apiSettings.methods[i];
+        if(typeof method.name !== "undefined" && typeof method.function !== "undefined") {
+          api[method.name] = method.function;
+        }
+      }
+    }
     app._APIState = false;
-    // inject a globally available $translate() method
     app.config.globalProperties["$api"] = reactive(api);
     app.mixin({
       created: function beforeCreate() {
@@ -79,7 +90,7 @@ export default {
           for (var name in watchers) {
             this.$watch(name, watchers[name]);
           }
-          if (this.$state.accessToken) {
+          /*if (this.$state.accessToken) {
             var self = this;
             self.$api.testAccessToken(
               self.$state.accessToken,
@@ -87,12 +98,8 @@ export default {
                 if (!err) {
                   var clientSettings = {
                     URL: apiSettings.apiURL,
-                  }
-                  if(answer.secureKey) {
-                    clientSettings.secureKey = answer.secureKey;
-                  } else {
-                    clientSettings.accessToken = self.$state.accessToken;
-                  }
+                  };
+                  clientSettings.accessToken = self.$state.accessToken;
                   self.$api.client = new MicroserviceClient(clientSettings);
                   if (answer.expireAt) {
                     self.$state.expireAt = answer.expireAt;
@@ -100,7 +107,7 @@ export default {
                 }
               }
             );
-          }
+          }*/
         }
       },
     });

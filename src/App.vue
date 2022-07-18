@@ -24,12 +24,21 @@ export default {
     },
     "$api.client": function (newValue) {
       if (newValue) {
-        var self = this;
         this.$dataset.services.refresh();
-        self.$state.isLogin = true;
+        this.$state.isLogin = true;
+      } else {
+        this.$state.accessToken = "";
+        this.$state.expireAt = 0;
       }
     },
   },
-  mounted() {},
+  mounted() {
+    if(this.$state.accessToken !== 0 || this.$state.accessToken !== '') {
+      this.$api.setAccessToken({
+        accessToken: this.$state.accessToken,
+        expireAt: this.$state.expireAt
+      })
+    }
+  },
 };
 </script>

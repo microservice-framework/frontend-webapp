@@ -18,6 +18,10 @@ export default {
           if (answer.expireAt) {
             self.$state.expireAt = answer.expireAt;
           }
+          self.$api.setAccessToken({
+            accessToken: self.$state.accessToken,
+            expireAt: self.$state.expireAt
+          })
         }
       });
     },

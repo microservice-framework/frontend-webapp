@@ -11,6 +11,14 @@ window.APP = createApp(App);
 
 var apiSettings = {
   apiURL: "http://ca.local:2100",
+  methods: [
+    {
+      name: "printSelf",
+      function: function(){
+        console.log(this);
+      }
+    }
+  ]
 };
 
 var sessionName = "API-Browser-APP";
@@ -66,7 +74,7 @@ var defaultDataSet = {
   },
 };
 
-//window.APP.use(createPinia());
+
 window.APP.use(router);
 window.APP.use(PersistState, sessionName, defaultSettings);
 window.APP.use(DatasetState, defaultDataSet);
