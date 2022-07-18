@@ -2,7 +2,7 @@ import { createApp } from "vue";
 //import { createPinia } from "pinia";
 import SourcesBus from "./plugins/sources";
 import PersistState from "vue-persist-state";
-import DatasetState from "./plugins/dataset";
+import DatasetState from "@gormartsen/vue-dataset";
 import ApiClient from "./plugins/apiClient";
 
 var SourceData = {
