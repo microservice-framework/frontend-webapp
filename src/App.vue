@@ -20,6 +20,7 @@ export default {
       if (newValue == 0) {
         this.$state.isLogin = false;
         this.$dataset.services = [];
+        this.$api.expireAt = 0;
       }
     },
     "$api.client": function (newValue) {

@@ -12,7 +12,7 @@ function getWatch() {
       this.$api.online = false;
     },
     "$api.accessToken": function (newValue) {
-      if (newValue) {
+      if (newValue && newValue != "") {
         return (this.$api.client = new MicroserviceClient({
           URL: this.$api.url,
           accessToken: newValue,
@@ -23,6 +23,7 @@ function getWatch() {
     "$api.expireAt": function (newValue, oldValue) {
       if (newValue == 0) {
         this.$api.client = false;
+        this.$api.accessToken = "";
         return;
       }
       if (newValue < oldValue) {
@@ -36,6 +37,7 @@ function getWatch() {
       if (period > 0 && !isNaN(period)) {
         this.$api.timerApiClient = setTimeout(function () {
           self.$api.expireAt = 0;
+          self.$api.accessToken = "";
         }, period);
       }
     },
@@ -93,24 +95,6 @@ export default {
           for (var name in watchers) {
             this.$watch(name, watchers[name]);
           }
-          /*if (this.$state.accessToken) {
-            var self = this;
-            self.$api.testAccessToken(
-              self.$state.accessToken,
-              function (err, answer) {
-                if (!err) {
-                  var clientSettings = {
-                    URL: apiSettings.apiURL,
-                  };
-                  clientSettings.accessToken = self.$state.accessToken;
-                  self.$api.client = new MicroserviceClient(clientSettings);
-                  if (answer.expireAt) {
-                    self.$state.expireAt = answer.expireAt;
-                  }
-                }
-              }
-            );
-          }*/
         }
       },
     });
