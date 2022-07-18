@@ -52,7 +52,7 @@ export default {
       this.dropdown = !this.dropdown;
     },
     selectItem: function (method) {
-      this.$sources.service.method = method;
+      this.$state.service.method = method;
       this.dropdown = !this.dropdown;
       this.url = this.EndPoint.path;
       if (["PUT", "DELETE", "GET"].indexOf(this.EndPoint.method) !== -1) {

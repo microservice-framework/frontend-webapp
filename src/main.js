@@ -1,17 +1,9 @@
 import { createApp } from "vue";
-//import { createPinia } from "pinia";
-import SourcesBus from "./plugins/sources";
 import PersistState from "vue-persist-state";
 import DatasetState from "@gormartsen/vue-dataset";
 import ApiClient from "./plugins/apiClient";
 
-var SourceData = {
-  isLogin: false,
-  AccessToken: "",
-  services: [],
-  information: {},
-  service: {},
-};
+
 import App from "./App.vue";
 import router from "./router";
 
@@ -31,9 +23,14 @@ var defaultSettings = {
     type: "number",
     default: 0,
   },
-  testing: {
-    type: "string",
-    default: "testing",
+  service: {
+    type: "object",
+    default: {},
+    persist: false,
+  },
+  isLogin: {
+    type: "boolean",
+    default: false,
     persist: false,
   }
 };
@@ -71,7 +68,6 @@ var defaultDataSet = {
 
 //window.APP.use(createPinia());
 window.APP.use(router);
-window.APP.use(SourcesBus, SourceData);
 window.APP.use(PersistState, sessionName, defaultSettings);
 window.APP.use(DatasetState, defaultDataSet);
 window.APP.use(ApiClient, apiSettings);

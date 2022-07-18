@@ -9,5 +9,5 @@
     <RouterLink to="/about">About</RouterLink>
   </nav>
 </header>
-<Login v-if="!$sources.isLogin"></Login>
-<RouterView v-if="$sources.isLogin"></RouterView>
+<Login v-if="!$state.isLogin"></Login>
+<RouterView v-if="$state.isLogin"></RouterView>

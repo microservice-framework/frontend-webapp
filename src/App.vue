@@ -18,15 +18,15 @@ export default {
   watch: {
     "$state.accessToken"(newValue) {
       if (newValue == 0) {
-        this.$sources.isLogin = false;
-        this.$sources.services = [];
+        this.$state.isLogin = false;
+        this.$dataset.services = [];
       }
     },
     "$api.client": function (newValue) {
       if (newValue) {
         var self = this;
         this.$dataset.services.refresh();
-        self.$sources.isLogin = true;
+        self.$state.isLogin = true;
       }
     },
   },

@@ -11,7 +11,7 @@ import EndPointForm from "@/components/EndPointForm/EndPointForm.vue";
       </div>
     </div>
   </main>
-  <div v-if="$sources.service && $sources.service.method">
-    <EndPointForm :EndPoint="$sources.service"></EndPointForm>
+  <div v-if="$state.service && $state.service.method">
+    <EndPointForm :EndPoint="$state.service"></EndPointForm>
   </div>
 </template>

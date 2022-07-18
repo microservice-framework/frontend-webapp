@@ -16,8 +16,8 @@ export default {
   },
   methods: {
     selectItem: function (method) {
-      this.$sources.service = this.EndPoint;
-      this.$sources.service.method = method;
+      this.$state.service = this.EndPoint;
+      this.$state.service.method = method;
       return false;
     },
   },
