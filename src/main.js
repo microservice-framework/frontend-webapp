@@ -1,7 +1,7 @@
 import { createApp } from "vue";
 //import { createPinia } from "pinia";
 import SourcesBus from "./plugins/sources";
-import PersistState from "./plugins/persist";
+import PersistState from "vue-persist-state";
 import DatasetState from "./plugins/dataset";
 import ApiClient from "./plugins/apiClient";
 
@@ -31,6 +31,11 @@ var defaultSettings = {
     type: "number",
     default: 0,
   },
+  testing: {
+    type: "string",
+    default: "testing",
+    persist: false,
+  }
 };
 
 var defaultDataSet = {
