@@ -33,11 +33,11 @@ export default {
     },
   },
   mounted() {
-    if(this.$state.accessToken !== 0 || this.$state.accessToken !== '') {
+    if (this.$state.accessToken !== 0 || this.$state.accessToken !== "") {
       this.$api.setAccessToken({
         accessToken: this.$state.accessToken,
-        expireAt: this.$state.expireAt
-      })
+        expireAt: this.$state.expireAt,
+      });
     }
   },
 };

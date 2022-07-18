@@ -3,7 +3,6 @@ import PersistState from "vue-persist-state";
 import DatasetState from "@gormartsen/vue-dataset";
 import ApiClient from "./plugins/apiClient";
 
-
 import App from "./App.vue";
 import router from "./router";
 
@@ -14,11 +13,11 @@ var apiSettings = {
   methods: [
     {
       name: "printSelf",
-      function: function(){
+      function: function () {
         console.log(this);
-      }
-    }
-  ]
+      },
+    },
+  ],
 };
 
 var sessionName = "API-Browser-APP";
@@ -40,7 +39,7 @@ var defaultSettings = {
     type: "boolean",
     default: false,
     persist: false,
-  }
+  },
 };
 
 var defaultDataSet = {
@@ -73,7 +72,6 @@ var defaultDataSet = {
     },
   },
 };
-
 
 window.APP.use(router);
 window.APP.use(PersistState, sessionName, defaultSettings);

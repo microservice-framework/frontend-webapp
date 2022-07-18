@@ -20,8 +20,8 @@ export default {
           }
           self.$api.setAccessToken({
             accessToken: self.$state.accessToken,
-            expireAt: self.$state.expireAt
-          })
+            expireAt: self.$state.expireAt,
+          });
         }
       });
     },

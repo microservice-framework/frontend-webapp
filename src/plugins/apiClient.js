@@ -12,11 +12,11 @@ function getWatch() {
       this.$api.online = false;
     },
     "$api.accessToken": function (newValue) {
-      if(newValue) {
-        return this.$api.client = new MicroserviceClient({
+      if (newValue) {
+        return (this.$api.client = new MicroserviceClient({
           URL: this.$api.url,
           accessToken: newValue,
-        });
+        }));
       }
       this.$api.client = false;
     },
@@ -51,9 +51,9 @@ export default {
       client: false,
       timerApiClient: false,
       url: apiSettings.apiURL,
-      accessToken: '',
+      accessToken: "",
       expireAt: 0,
-      setAccessToken: function(setValue) {
+      setAccessToken: function (setValue) {
         this.accessToken = setValue.accessToken;
         this.expireAt = setValue.expireAt;
       },
@@ -71,10 +71,13 @@ export default {
         });
       },
     };
-    if(apiSettings.methods) {
-      for(var i in apiSettings.methods) {
+    if (apiSettings.methods) {
+      for (var i in apiSettings.methods) {
         var method = apiSettings.methods[i];
-        if(typeof method.name !== "undefined" && typeof method.function !== "undefined") {
+        if (
+          typeof method.name !== "undefined" &&
+          typeof method.function !== "undefined"
+        ) {
           api[method.name] = method.function;
         }
       }
