@@ -1,0 +1,6 @@
+{
+  "outDir": "dist/default",
+  "alias": {
+    "vue-debug": "@gormartsen/vue-debug"
+  }
+}

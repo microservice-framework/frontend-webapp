@@ -2,7 +2,7 @@ import { createApp } from "vue";
 import PersistState from "vue-persist-state";
 import DatasetState from "@gormartsen/vue-dataset";
 import ApiClient from "@microservice-framework/vue-api-client";
-import Debug from "@gormartsen/vue-debug";
+import Debug from "vue-debug";
 
 import App from "./App.vue";
 import router from "./router";
