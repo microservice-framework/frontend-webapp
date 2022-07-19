@@ -9,9 +9,8 @@
   },
   "dependencies": {
     "@gormartsen/vue-dataset": "^1.0.0",
-    "@microservice-framework/microservice-client": "^1.3.4",
+    "@gormartsen/vue-debug": "^1.0.0",
     "@microservice-framework/vue-api-client": "^1.0.0",
-    "pinia": "^2.0.14",
     "vue": "^3.2.37",
     "vue-persist-state": "^2.0.0",
     "vue-router": "^4.0.16"
